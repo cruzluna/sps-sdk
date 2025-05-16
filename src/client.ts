@@ -12,7 +12,6 @@ import type { APIResponseProps } from './internal/parse';
 import { getPlatformHeaders } from './internal/detect-platform';
 import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
-import * as qs from './internal/qs';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
@@ -22,38 +21,24 @@ import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
 import {
-  Category,
-  Pet,
-  PetCreateParams,
-  PetFindByStatusParams,
-  PetFindByStatusResponse,
-  PetFindByTagsParams,
-  PetFindByTagsResponse,
-  PetResource,
-  PetUpdateByIDParams,
-  PetUpdateParams,
-  PetUploadImageParams,
-  PetUploadImageResponse,
-} from './resources/pet';
-import {
-  User,
-  UserCreateParams,
-  UserCreateWithListParams,
-  UserLoginParams,
-  UserLoginResponse,
-  UserResource,
-  UserUpdateParams,
-} from './resources/user';
+  Prompt,
+  PromptCreateParams,
+  PromptCreateResponse,
+  PromptRetrieveContentParams,
+  PromptRetrieveContentResponse,
+  PromptRetrieveResponse,
+  PromptUpdateMetadataResponse,
+  PromptUpdateResponse,
+} from './resources/prompt';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
-import { Store, StoreListInventoryResponse } from './resources/store/store';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['PETSTORE_API_KEY'].
+   * Defaults to process.env['SYSTEM_PROMPT_STORAGE_API_KEY'].
    */
-  apiKey?: string | undefined;
+  apiKey?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -126,7 +111,7 @@ export interface ClientOptions {
  * API Client for interfacing with the System Prompt Storage API.
  */
 export class SystemPromptStorage {
-  apiKey: string;
+  apiKey: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -143,8 +128,8 @@ export class SystemPromptStorage {
   /**
    * API Client for interfacing with the System Prompt Storage API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['PETSTORE_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['SYSTEM_PROMPT_STORAGE_BASE_URL'] ?? https://petstore3.swagger.io/api/v3] - Override the default base URL for the API.
+   * @param {string | null | undefined} [opts.apiKey=process.env['SYSTEM_PROMPT_STORAGE_API_KEY'] ?? null]
+   * @param {string} [opts.baseURL=process.env['SYSTEM_PROMPT_STORAGE_BASE_URL'] ?? https://api.example.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -154,19 +139,13 @@ export class SystemPromptStorage {
    */
   constructor({
     baseURL = readEnv('SYSTEM_PROMPT_STORAGE_BASE_URL'),
-    apiKey = readEnv('PETSTORE_API_KEY'),
+    apiKey = readEnv('SYSTEM_PROMPT_STORAGE_API_KEY') ?? null,
     ...opts
   }: ClientOptions = {}) {
-    if (apiKey === undefined) {
-      throw new Errors.SystemPromptStorageError(
-        "The PETSTORE_API_KEY environment variable is missing or empty; either provide it, or instantiate the SystemPromptStorage client with an apiKey option, like new SystemPromptStorage({ apiKey: 'My API Key' }).",
-      );
-    }
-
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://petstore3.swagger.io/api/v3`,
+      baseURL: baseURL || `https://api.example.com`,
     };
 
     this.baseURL = options.baseURL!;
@@ -211,15 +190,43 @@ export class SystemPromptStorage {
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
-    return;
+    if (this.apiKey && values.get('authorization')) {
+      return;
+    }
+    if (nulls.has('authorization')) {
+      return;
+    }
+
+    throw new Error(
+      'Could not resolve authentication method. Expected the apiKey to be set. Or for the "Authorization" headers to be explicitly omitted',
+    );
   }
 
   protected authHeaders(opts: FinalRequestOptions): NullableHeaders | undefined {
-    return buildHeaders([{ api_key: this.apiKey }]);
+    if (this.apiKey == null) {
+      return undefined;
+    }
+    return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
   }
 
+  /**
+   * Basic re-implementation of `qs.stringify` for primitive types.
+   */
   protected stringifyQuery(query: Record<string, unknown>): string {
-    return qs.stringify(query, { arrayFormat: 'comma' });
+    return Object.entries(query)
+      .filter(([_, value]) => typeof value !== 'undefined')
+      .map(([key, value]) => {
+        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+          return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+        }
+        if (value === null) {
+          return `${encodeURIComponent(key)}=`;
+        }
+        throw new Errors.SystemPromptStorageError(
+          `Cannot stringify type ${typeof value}; Expected string, number, boolean, or null. If you need to pass nested query parameters, you can manually encode them, e.g. { query: { 'foo[key1]': value1, 'foo[key2]': value2 } }, and please open a GitHub issue requesting better support for your use case.`,
+        );
+      })
+      .join('&');
   }
 
   private getUserAgent(): string {
@@ -699,42 +706,20 @@ export class SystemPromptStorage {
 
   static toFile = Uploads.toFile;
 
-  pet: API.PetResource = new API.PetResource(this);
-  store: API.Store = new API.Store(this);
-  user: API.UserResource = new API.UserResource(this);
+  prompt: API.Prompt = new API.Prompt(this);
 }
-SystemPromptStorage.PetResource = PetResource;
-SystemPromptStorage.Store = Store;
-SystemPromptStorage.UserResource = UserResource;
+SystemPromptStorage.Prompt = Prompt;
 export declare namespace SystemPromptStorage {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
-    PetResource as PetResource,
-    type Category as Category,
-    type Pet as Pet,
-    type PetFindByStatusResponse as PetFindByStatusResponse,
-    type PetFindByTagsResponse as PetFindByTagsResponse,
-    type PetUploadImageResponse as PetUploadImageResponse,
-    type PetCreateParams as PetCreateParams,
-    type PetUpdateParams as PetUpdateParams,
-    type PetFindByStatusParams as PetFindByStatusParams,
-    type PetFindByTagsParams as PetFindByTagsParams,
-    type PetUpdateByIDParams as PetUpdateByIDParams,
-    type PetUploadImageParams as PetUploadImageParams,
+    Prompt as Prompt,
+    type PromptCreateResponse as PromptCreateResponse,
+    type PromptRetrieveResponse as PromptRetrieveResponse,
+    type PromptUpdateResponse as PromptUpdateResponse,
+    type PromptRetrieveContentResponse as PromptRetrieveContentResponse,
+    type PromptUpdateMetadataResponse as PromptUpdateMetadataResponse,
+    type PromptCreateParams as PromptCreateParams,
+    type PromptRetrieveContentParams as PromptRetrieveContentParams,
   };
-
-  export { Store as Store, type StoreListInventoryResponse as StoreListInventoryResponse };
-
-  export {
-    UserResource as UserResource,
-    type User as User,
-    type UserLoginResponse as UserLoginResponse,
-    type UserCreateParams as UserCreateParams,
-    type UserUpdateParams as UserUpdateParams,
-    type UserCreateWithListParams as UserCreateWithListParams,
-    type UserLoginParams as UserLoginParams,
-  };
-
-  export type Order = API.Order;
 }

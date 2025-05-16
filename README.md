@@ -11,7 +11,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:stainless-sdks/system-prompt-storage-typescript.git
+npm install git+ssh://git@github.com:cruzluna/sps-sdk.git
 ```
 
 > [!NOTE]
@@ -26,13 +26,13 @@ The full API of this library can be found in [api.md](api.md).
 import SystemPromptStorage from 'system-prompt-storage';
 
 const client = new SystemPromptStorage({
-  apiKey: process.env['PETSTORE_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['SYSTEM_PROMPT_STORAGE_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const order = await client.store.order.create({ petId: 1, quantity: 1, status: 'placed' });
+  const prompt = await client.prompt.create({ content: 'content' });
 
-  console.log(order.id);
+  console.log(prompt.id);
 }
 
 main();
@@ -47,11 +47,12 @@ This library includes TypeScript definitions for all request params and response
 import SystemPromptStorage from 'system-prompt-storage';
 
 const client = new SystemPromptStorage({
-  apiKey: process.env['PETSTORE_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['SYSTEM_PROMPT_STORAGE_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const response: SystemPromptStorage.StoreListInventoryResponse = await client.store.listInventory();
+  const params: SystemPromptStorage.PromptCreateParams = { content: 'content' };
+  const prompt: SystemPromptStorage.PromptCreateResponse = await client.prompt.create(params);
 }
 
 main();
@@ -68,7 +69,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const response = await client.store.listInventory().catch(async (err) => {
+  const prompt = await client.prompt.create({ content: 'content' }).catch(async (err) => {
     if (err instanceof SystemPromptStorage.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -111,7 +112,7 @@ const client = new SystemPromptStorage({
 });
 
 // Or, configure per-request:
-await client.store.listInventory({
+await client.prompt.create({ content: 'content' }, {
   maxRetries: 5,
 });
 ```
@@ -128,7 +129,7 @@ const client = new SystemPromptStorage({
 });
 
 // Override per-request:
-await client.store.listInventory({
+await client.prompt.create({ content: 'content' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -151,13 +152,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new SystemPromptStorage();
 
-const response = await client.store.listInventory().asResponse();
+const response = await client.prompt.create({ content: 'content' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.store.listInventory().withResponse();
+const { data: prompt, response: raw } = await client.prompt.create({ content: 'content' }).withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response);
+console.log(prompt.id);
 ```
 
 ### Logging
@@ -348,7 +349,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/system-prompt-storage-typescript/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/cruzluna/sps-sdk/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 

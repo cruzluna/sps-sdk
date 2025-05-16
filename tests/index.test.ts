@@ -312,13 +312,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['SYSTEM_PROMPT_STORAGE_BASE_URL'] = ''; // empty
       const client = new SystemPromptStorage({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://petstore3.swagger.io/api/v3');
+      expect(client.baseURL).toEqual('https://api.example.com');
     });
 
     test('blank env variable', () => {
       process.env['SYSTEM_PROMPT_STORAGE_BASE_URL'] = '  '; // blank
       const client = new SystemPromptStorage({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://petstore3.swagger.io/api/v3');
+      expect(client.baseURL).toEqual('https://api.example.com');
     });
   });
 
@@ -409,14 +409,14 @@ describe('instantiate client', () => {
 
   test('with environment variable arguments', () => {
     // set options via env var
-    process.env['PETSTORE_API_KEY'] = 'My API Key';
+    process.env['SYSTEM_PROMPT_STORAGE_API_KEY'] = 'My API Key';
     const client = new SystemPromptStorage();
     expect(client.apiKey).toBe('My API Key');
   });
 
   test('with overridden environment variable arguments', () => {
     // set options via env var
-    process.env['PETSTORE_API_KEY'] = 'another My API Key';
+    process.env['SYSTEM_PROMPT_STORAGE_API_KEY'] = 'another My API Key';
     const client = new SystemPromptStorage({ apiKey: 'My API Key' });
     expect(client.apiKey).toBe('My API Key');
   });

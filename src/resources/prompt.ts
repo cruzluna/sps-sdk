@@ -92,11 +92,6 @@ export interface PromptCreateResponse {
   parent: string;
 
   /**
-   * The last update date of the prompt
-   */
-  updated_at: number;
-
-  /**
    * The version of the prompt
    */
   version: number;

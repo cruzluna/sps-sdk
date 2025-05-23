@@ -23,13 +23,17 @@ import { FinalRequestOptions, RequestOptions } from './internal/request-options'
 import {
   Prompt,
   PromptCreateParams,
-  PromptCreateResponse,
   PromptListParams,
   PromptListResponse,
   PromptRetrieveContentParams,
   PromptRetrieveContentResponse,
   PromptRetrieveResponse,
-} from './resources/prompt';
+  PromptUpdateMetadataParams,
+  PromptUpdateMetadataResponse,
+  PromptUpdateParams,
+  PromptUpdateResponse,
+  Prompts,
+} from './resources/prompts';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
@@ -706,20 +710,24 @@ export class SystemPromptStorage {
 
   static toFile = Uploads.toFile;
 
-  prompt: API.Prompt = new API.Prompt(this);
+  prompts: API.Prompts = new API.Prompts(this);
 }
-SystemPromptStorage.Prompt = Prompt;
+SystemPromptStorage.Prompts = Prompts;
 export declare namespace SystemPromptStorage {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
-    Prompt as Prompt,
-    type PromptCreateResponse as PromptCreateResponse,
+    Prompts as Prompts,
+    type Prompt as Prompt,
     type PromptRetrieveResponse as PromptRetrieveResponse,
+    type PromptUpdateResponse as PromptUpdateResponse,
     type PromptListResponse as PromptListResponse,
     type PromptRetrieveContentResponse as PromptRetrieveContentResponse,
+    type PromptUpdateMetadataResponse as PromptUpdateMetadataResponse,
     type PromptCreateParams as PromptCreateParams,
+    type PromptUpdateParams as PromptUpdateParams,
     type PromptListParams as PromptListParams,
     type PromptRetrieveContentParams as PromptRetrieveContentParams,
+    type PromptUpdateMetadataParams as PromptUpdateMetadataParams,
   };
 }

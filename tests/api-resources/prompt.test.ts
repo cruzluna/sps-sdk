@@ -46,8 +46,12 @@ describe('resource prompt', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = client.prompt.update('id');
+  test.skip('update: only required params', async () => {
+    const responsePromise = client.prompt.update('id', {
+      body_id: 'id',
+      content: 'content',
+      parent: 'parent',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -55,6 +59,16 @@ describe('resource prompt', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await client.prompt.update('id', {
+      body_id: 'id',
+      content: 'content',
+      parent: 'parent',
+      branched: true,
+    });
   });
 
   // skipped: tests are disabled for the time being
@@ -87,8 +101,8 @@ describe('resource prompt', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('updateMetadata', async () => {
-    const responsePromise = client.prompt.updateMetadata('id');
+  test.skip('updateMetadata: only required params', async () => {
+    const responsePromise = client.prompt.updateMetadata('id', { body_id: 'id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -96,5 +110,16 @@ describe('resource prompt', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('updateMetadata: required and optional params', async () => {
+    const response = await client.prompt.updateMetadata('id', {
+      body_id: 'id',
+      category: 'category',
+      description: 'description',
+      name: 'name',
+      tags: ['string'],
+    });
   });
 });

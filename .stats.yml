@@ -1,4 +1,4 @@
-configured_endpoints: 6
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/cruz%2Fsystem-prompt-storage-b2ede09c3df9690c6b7617ccb45e46cbdfc35060ed67a00cdee4229202546f88.yml
-openapi_spec_hash: 8d974bee2e556753f123a673732a2a7a
-config_hash: 328daa0117a70b1df78e10f3aab6576c
+configured_endpoints: 7
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/cruz%2Fsystem-prompt-storage-16656c3988bbf383e97753354a0ff7e04ccb3fdcd066ca2db664cab0cfc93451.yml
+openapi_spec_hash: 6cdec59fe7268f2dfb8b61e1ecfb2513
+config_hash: eac333f52c89f835fdfb763fac22a7c8

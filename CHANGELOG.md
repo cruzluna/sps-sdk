@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-alpha.5 (2025-05-23)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Features
+
+* **api:** update via SDK Studio ([0bb0ce0](https://github.com/cruzluna/sps-sdk/commit/0bb0ce0f12314cd1b9d93da349ed94ba222e94dc))
+* **api:** update via SDK Studio ([381d330](https://github.com/cruzluna/sps-sdk/commit/381d330c397849956ae4b77657af9fd3357cb862))
+
 ## 0.1.0-alpha.4 (2025-05-23)
 
 Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)

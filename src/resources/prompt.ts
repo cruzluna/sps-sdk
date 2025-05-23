@@ -27,8 +27,9 @@ export class Prompt extends APIResource {
   /**
    * Update prompt
    */
-  update(id: string, options?: RequestOptions): APIPromise<string> {
-    return this._client.put(path`/prompt/${id}`, {
+  update(pathID: string, body: PromptUpdateParams, options?: RequestOptions): APIPromise<string> {
+    return this._client.put(path`/prompt/${pathID}`, {
+      body,
       ...options,
       headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
     });
@@ -62,8 +63,13 @@ export class Prompt extends APIResource {
   /**
    * Update prompt metadata
    */
-  updateMetadata(id: string, options?: RequestOptions): APIPromise<string> {
-    return this._client.put(path`/prompt/${id}/metadata`, {
+  updateMetadata(
+    pathID: string,
+    body: PromptUpdateMetadataParams,
+    options?: RequestOptions,
+  ): APIPromise<string> {
+    return this._client.put(path`/prompt/${pathID}/metadata`, {
+      body,
       ...options,
       headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
     });
@@ -185,11 +191,61 @@ export interface PromptCreateParams {
   tags?: Array<string> | null;
 }
 
+export interface PromptUpdateParams {
+  /**
+   * The id of the prompt to update
+   */
+  body_id: string;
+
+  /**
+   * The content of the updated prompt
+   */
+  content: string;
+
+  /**
+   * The parent of the updated prompt. Most times its the same as the id of the
+   * prompt to update.
+   */
+  parent: string;
+
+  /**
+   * Whether the updated prompt is branched
+   */
+  branched?: boolean | null;
+}
+
 export interface PromptRetrieveContentParams {
   /**
    * Latest version of the prompt
    */
   latest: boolean;
+}
+
+export interface PromptUpdateMetadataParams {
+  /**
+   * The id of the prompt
+   */
+  body_id: string;
+
+  /**
+   * The category of the prompt
+   */
+  category?: string | null;
+
+  /**
+   * The description of the prompt
+   */
+  description?: string | null;
+
+  /**
+   * The name of the prompt
+   */
+  name?: string | null;
+
+  /**
+   * The tags of the prompt
+   */
+  tags?: Array<string> | null;
 }
 
 export declare namespace Prompt {
@@ -200,6 +256,8 @@ export declare namespace Prompt {
     type PromptRetrieveContentResponse as PromptRetrieveContentResponse,
     type PromptUpdateMetadataResponse as PromptUpdateMetadataResponse,
     type PromptCreateParams as PromptCreateParams,
+    type PromptUpdateParams as PromptUpdateParams,
     type PromptRetrieveContentParams as PromptRetrieveContentParams,
+    type PromptUpdateMetadataParams as PromptUpdateMetadataParams,
   };
 }

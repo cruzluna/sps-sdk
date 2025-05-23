@@ -36,6 +36,13 @@ export class Prompt extends APIResource {
   }
 
   /**
+   * Get list of prompts with pagination
+   */
+  list(query: PromptListParams, options?: RequestOptions): APIPromise<PromptListResponse> {
+    return this._client.get('/prompts', { query, ...options });
+  }
+
+  /**
    * Delete prompt
    */
   delete(id: string, options?: RequestOptions): APIPromise<void> {
@@ -149,6 +156,79 @@ export type PromptRetrieveResponse = string;
 
 export type PromptUpdateResponse = string;
 
+export type PromptListResponse = Array<PromptListResponse.PromptListResponseItem>;
+
+export namespace PromptListResponse {
+  export interface PromptListResponseItem {
+    /**
+     * The id of the prompt
+     */
+    id: string;
+
+    /**
+     * The content of the prompt
+     */
+    content: string;
+
+    /**
+     * The creation date of the prompt
+     */
+    created_at: number;
+
+    /**
+     * The parent of the prompt
+     */
+    parent: string;
+
+    /**
+     * The version of the prompt
+     */
+    version: number;
+
+    /**
+     * Whether the prompt is archived
+     */
+    archived?: boolean | null;
+
+    /**
+     * Whether the prompt is being branched
+     */
+    branched?: boolean | null;
+
+    /**
+     * The metadata of the prompt
+     */
+    metadata?: PromptListResponseItem.Metadata | null;
+  }
+
+  export namespace PromptListResponseItem {
+    /**
+     * The metadata of the prompt
+     */
+    export interface Metadata {
+      /**
+       * Category of the prompt ie React, typescript, etc.
+       */
+      category?: string | null;
+
+      /**
+       * Description of the prompt
+       */
+      description?: string | null;
+
+      /**
+       * Name of the prompt
+       */
+      name?: string | null;
+
+      /**
+       * Tags of the prompt ie [react, typescript, etc.]
+       */
+      tags?: Array<string> | null;
+    }
+  }
+}
+
 export type PromptRetrieveContentResponse = string;
 
 export type PromptUpdateMetadataResponse = string;
@@ -214,6 +294,28 @@ export interface PromptUpdateParams {
   branched?: boolean | null;
 }
 
+export interface PromptListParams {
+  /**
+   * The category of the prompts to return
+   */
+  category: string;
+
+  /**
+   * The pagination offset to start from (0-based)
+   */
+  from: number;
+
+  /**
+   * The number of prompts to return
+   */
+  size: number;
+
+  /**
+   * The pagination offset to end at (exclusive)
+   */
+  to: number;
+}
+
 export interface PromptRetrieveContentParams {
   /**
    * Latest version of the prompt
@@ -253,10 +355,12 @@ export declare namespace Prompt {
     type PromptCreateResponse as PromptCreateResponse,
     type PromptRetrieveResponse as PromptRetrieveResponse,
     type PromptUpdateResponse as PromptUpdateResponse,
+    type PromptListResponse as PromptListResponse,
     type PromptRetrieveContentResponse as PromptRetrieveContentResponse,
     type PromptUpdateMetadataResponse as PromptUpdateMetadataResponse,
     type PromptCreateParams as PromptCreateParams,
     type PromptUpdateParams as PromptUpdateParams,
+    type PromptListParams as PromptListParams,
     type PromptRetrieveContentParams as PromptRetrieveContentParams,
     type PromptUpdateMetadataParams as PromptUpdateMetadataParams,
   };

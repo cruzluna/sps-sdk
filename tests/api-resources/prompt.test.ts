@@ -72,6 +72,23 @@ describe('resource prompt', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.prompt.list({ category: 'category', from: 0, size: 0, to: 0 });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
+    const response = await client.prompt.list({ category: 'category', from: 0, size: 0, to: 0 });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
     const responsePromise = client.prompt.delete('id');
     const rawResponse = await responsePromise.asResponse();

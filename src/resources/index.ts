@@ -1,12 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  Prompt,
-  type PromptCreateResponse,
+  Prompts,
+  type Prompt,
   type PromptRetrieveResponse,
+  type PromptUpdateResponse,
   type PromptListResponse,
   type PromptRetrieveContentResponse,
+  type PromptUpdateMetadataResponse,
   type PromptCreateParams,
+  type PromptUpdateParams,
   type PromptListParams,
   type PromptRetrieveContentParams,
-} from './prompt';
+  type PromptUpdateMetadataParams,
+} from './prompts';

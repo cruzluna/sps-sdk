@@ -27,7 +27,7 @@ const client = new SystemPromptStorage({
 });
 
 async function main() {
-  const prompt = await client.prompt.create({ content: 'content' });
+  const prompt = await client.prompts.create({ content: 'content' });
 
   console.log(prompt.id);
 }
@@ -49,7 +49,7 @@ const client = new SystemPromptStorage({
 
 async function main() {
   const params: SystemPromptStorage.PromptCreateParams = { content: 'content' };
-  const prompt: SystemPromptStorage.PromptCreateResponse = await client.prompt.create(params);
+  const prompt: SystemPromptStorage.Prompt = await client.prompts.create(params);
 }
 
 main();
@@ -66,7 +66,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const prompt = await client.prompt.create({ content: 'content' }).catch(async (err) => {
+  const prompt = await client.prompts.create({ content: 'content' }).catch(async (err) => {
     if (err instanceof SystemPromptStorage.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -109,7 +109,7 @@ const client = new SystemPromptStorage({
 });
 
 // Or, configure per-request:
-await client.prompt.create({ content: 'content' }, {
+await client.prompts.create({ content: 'content' }, {
   maxRetries: 5,
 });
 ```
@@ -126,7 +126,7 @@ const client = new SystemPromptStorage({
 });
 
 // Override per-request:
-await client.prompt.create({ content: 'content' }, {
+await client.prompts.create({ content: 'content' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -149,11 +149,11 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new SystemPromptStorage();
 
-const response = await client.prompt.create({ content: 'content' }).asResponse();
+const response = await client.prompts.create({ content: 'content' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: prompt, response: raw } = await client.prompt.create({ content: 'content' }).withResponse();
+const { data: prompt, response: raw } = await client.prompts.create({ content: 'content' }).withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(prompt.id);
 ```

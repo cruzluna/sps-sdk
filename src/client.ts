@@ -133,7 +133,7 @@ export class SystemPromptStorage {
    * API Client for interfacing with the System Prompt Storage API.
    *
    * @param {string | null | undefined} [opts.apiKey=process.env['SYSTEM_PROMPT_STORAGE_API_KEY'] ?? null]
-   * @param {string} [opts.baseURL=process.env['SYSTEM_PROMPT_STORAGE_BASE_URL'] ?? https://api.example.com] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['SYSTEM_PROMPT_STORAGE_BASE_URL'] ?? https://api.cruzluna.dev] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -149,7 +149,7 @@ export class SystemPromptStorage {
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://api.example.com`,
+      baseURL: baseURL || `https://api.cruzluna.dev`,
     };
 
     this.baseURL = options.baseURL!;

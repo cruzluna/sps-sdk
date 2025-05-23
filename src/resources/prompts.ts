@@ -15,21 +15,15 @@ export class Prompts extends APIResource {
   }
 
   /**
-   * Get prompt
+   * Get entire prompt with option to include metadata
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<string> {
+  retrieve(
+    id: string,
+    query: PromptRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<string> {
     return this._client.get(path`/prompt/${id}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
-    });
-  }
-
-  /**
-   * Update prompt
-   */
-  update(pathID: string, body: PromptUpdateParams, options?: RequestOptions): APIPromise<string> {
-    return this._client.put(path`/prompt/${pathID}`, {
-      body,
+      query,
       ...options,
       headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
     });
@@ -57,26 +51,11 @@ export class Prompts extends APIResource {
    */
   retrieveContent(
     id: string,
-    query: PromptRetrieveContentParams,
+    query: PromptRetrieveContentParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<string> {
     return this._client.get(path`/prompt/${id}/content`, {
       query,
-      ...options,
-      headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
-    });
-  }
-
-  /**
-   * Update prompt metadata
-   */
-  updateMetadata(
-    pathID: string,
-    body: PromptUpdateMetadataParams,
-    options?: RequestOptions,
-  ): APIPromise<string> {
-    return this._client.put(path`/prompt/${pathID}/metadata`, {
-      body,
       ...options,
       headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
     });
@@ -154,13 +133,9 @@ export namespace Prompt {
 
 export type PromptRetrieveResponse = string;
 
-export type PromptUpdateResponse = string;
-
 export type PromptListResponse = Array<Prompt>;
 
 export type PromptRetrieveContentResponse = string;
-
-export type PromptUpdateMetadataResponse = string;
 
 export interface PromptCreateParams {
   /**
@@ -200,27 +175,11 @@ export interface PromptCreateParams {
   tags?: Array<string> | null;
 }
 
-export interface PromptUpdateParams {
+export interface PromptRetrieveParams {
   /**
-   * The id of the prompt to update
+   * Whether to include metadata in the response
    */
-  body_id: string;
-
-  /**
-   * The content of the updated prompt
-   */
-  content: string;
-
-  /**
-   * The parent of the updated prompt. Most times its the same as the id of the
-   * prompt to update.
-   */
-  parent: string;
-
-  /**
-   * Whether the updated prompt is branched
-   */
-  branched?: boolean | null;
+  metadata?: boolean;
 }
 
 export interface PromptListParams {
@@ -232,65 +191,35 @@ export interface PromptListParams {
   /**
    * The pagination offset to start from (0-based)
    */
-  from: number;
+  from?: number;
 
   /**
    * The number of prompts to return
    */
-  size: number;
+  size?: number;
 
   /**
    * The pagination offset to end at (exclusive)
    */
-  to: number;
+  to?: number;
 }
 
 export interface PromptRetrieveContentParams {
   /**
    * Latest version of the prompt
    */
-  latest: boolean;
-}
-
-export interface PromptUpdateMetadataParams {
-  /**
-   * The id of the prompt
-   */
-  body_id: string;
-
-  /**
-   * The category of the prompt
-   */
-  category?: string | null;
-
-  /**
-   * The description of the prompt
-   */
-  description?: string | null;
-
-  /**
-   * The name of the prompt
-   */
-  name?: string | null;
-
-  /**
-   * The tags of the prompt
-   */
-  tags?: Array<string> | null;
+  latest?: boolean;
 }
 
 export declare namespace Prompts {
   export {
     type Prompt as Prompt,
     type PromptRetrieveResponse as PromptRetrieveResponse,
-    type PromptUpdateResponse as PromptUpdateResponse,
     type PromptListResponse as PromptListResponse,
     type PromptRetrieveContentResponse as PromptRetrieveContentResponse,
-    type PromptUpdateMetadataResponse as PromptUpdateMetadataResponse,
     type PromptCreateParams as PromptCreateParams,
-    type PromptUpdateParams as PromptUpdateParams,
+    type PromptRetrieveParams as PromptRetrieveParams,
     type PromptListParams as PromptListParams,
     type PromptRetrieveContentParams as PromptRetrieveContentParams,
-    type PromptUpdateMetadataParams as PromptUpdateMetadataParams,
   };
 }

@@ -25,17 +25,6 @@ export class Prompt extends APIResource {
   }
 
   /**
-   * Update prompt
-   */
-  update(pathID: string, body: PromptUpdateParams, options?: RequestOptions): APIPromise<string> {
-    return this._client.put(path`/prompt/${pathID}`, {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
-    });
-  }
-
-  /**
    * Get list of prompts with pagination
    */
   list(query: PromptListParams, options?: RequestOptions): APIPromise<PromptListResponse> {
@@ -62,21 +51,6 @@ export class Prompt extends APIResource {
   ): APIPromise<string> {
     return this._client.get(path`/prompt/${id}/content`, {
       query,
-      ...options,
-      headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
-    });
-  }
-
-  /**
-   * Update prompt metadata
-   */
-  updateMetadata(
-    pathID: string,
-    body: PromptUpdateMetadataParams,
-    options?: RequestOptions,
-  ): APIPromise<string> {
-    return this._client.put(path`/prompt/${pathID}/metadata`, {
-      body,
       ...options,
       headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
     });
@@ -154,8 +128,6 @@ export namespace PromptCreateResponse {
 
 export type PromptRetrieveResponse = string;
 
-export type PromptUpdateResponse = string;
-
 export type PromptListResponse = Array<PromptListResponse.PromptListResponseItem>;
 
 export namespace PromptListResponse {
@@ -231,8 +203,6 @@ export namespace PromptListResponse {
 
 export type PromptRetrieveContentResponse = string;
 
-export type PromptUpdateMetadataResponse = string;
-
 export interface PromptCreateParams {
   /**
    * The content of the prompt
@@ -271,29 +241,6 @@ export interface PromptCreateParams {
   tags?: Array<string> | null;
 }
 
-export interface PromptUpdateParams {
-  /**
-   * The id of the prompt to update
-   */
-  body_id: string;
-
-  /**
-   * The content of the updated prompt
-   */
-  content: string;
-
-  /**
-   * The parent of the updated prompt. Most times its the same as the id of the
-   * prompt to update.
-   */
-  parent: string;
-
-  /**
-   * Whether the updated prompt is branched
-   */
-  branched?: boolean | null;
-}
-
 export interface PromptListParams {
   /**
    * The category of the prompts to return
@@ -323,45 +270,14 @@ export interface PromptRetrieveContentParams {
   latest: boolean;
 }
 
-export interface PromptUpdateMetadataParams {
-  /**
-   * The id of the prompt
-   */
-  body_id: string;
-
-  /**
-   * The category of the prompt
-   */
-  category?: string | null;
-
-  /**
-   * The description of the prompt
-   */
-  description?: string | null;
-
-  /**
-   * The name of the prompt
-   */
-  name?: string | null;
-
-  /**
-   * The tags of the prompt
-   */
-  tags?: Array<string> | null;
-}
-
 export declare namespace Prompt {
   export {
     type PromptCreateResponse as PromptCreateResponse,
     type PromptRetrieveResponse as PromptRetrieveResponse,
-    type PromptUpdateResponse as PromptUpdateResponse,
     type PromptListResponse as PromptListResponse,
     type PromptRetrieveContentResponse as PromptRetrieveContentResponse,
-    type PromptUpdateMetadataResponse as PromptUpdateMetadataResponse,
     type PromptCreateParams as PromptCreateParams,
-    type PromptUpdateParams as PromptUpdateParams,
     type PromptListParams as PromptListParams,
     type PromptRetrieveContentParams as PromptRetrieveContentParams,
-    type PromptUpdateMetadataParams as PromptUpdateMetadataParams,
   };
 }

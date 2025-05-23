@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-alpha.6 (2025-05-23)
+
+Full Changelog: [v0.1.0-alpha.5...v0.1.0-alpha.6](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.5...v0.1.0-alpha.6)
+
+### Features
+
+* **api:** api update ([cc4d3c1](https://github.com/cruzluna/sps-sdk/commit/cc4d3c13bda4dbb70fe2634ab501016e24d7a98c))
+* **api:** manual updates to openapi.stainless.yml ([95f299a](https://github.com/cruzluna/sps-sdk/commit/95f299a5bffe0748b21ee4ef937c2824cce02c91))
+
 ## 0.1.0-alpha.5 (2025-05-23)
 
 Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)

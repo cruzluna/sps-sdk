@@ -192,19 +192,14 @@ export interface PromptListParams {
   category?: string;
 
   /**
-   * The pagination offset to start from (0-based)
+   * The number of prompts to return. Default is 10.
    */
-  from?: number;
+  limit?: number;
 
   /**
-   * The number of prompts to return
+   * The pagination offset to start from (0-based). Default is 0.
    */
-  size?: number;
-
-  /**
-   * The pagination offset to end at (exclusive)
-   */
-  to?: number;
+  offset?: number;
 }
 
 export interface PromptRetrieveContentParams {

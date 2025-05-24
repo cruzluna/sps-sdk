@@ -54,8 +54,8 @@ describe('resource prompts', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.prompts.list({ category: 'category' });
+  test.skip('list', async () => {
+    const responsePromise = client.prompts.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,8 +66,14 @@ describe('resource prompts', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await client.prompts.list({ category: 'category', from: 0, size: 0, to: 0 });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.prompts.list(
+        { category: 'category', from: 0, size: 0, to: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(SystemPromptStorage.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being

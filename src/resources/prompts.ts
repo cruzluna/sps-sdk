@@ -32,7 +32,10 @@ export class Prompts extends APIResource {
   /**
    * Get list of prompts with pagination
    */
-  list(query: PromptListParams, options?: RequestOptions): APIPromise<PromptListResponse> {
+  list(
+    query: PromptListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PromptListResponse> {
     return this._client.get('/prompts', { query, ...options });
   }
 
@@ -186,7 +189,7 @@ export interface PromptListParams {
   /**
    * The category of the prompts to return
    */
-  category: string;
+  category?: string;
 
   /**
    * The pagination offset to start from (0-based)

@@ -70,7 +70,7 @@ describe('resource prompts', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.prompts.list(
-        { category: 'category', from: 0, size: 0, to: 0 },
+        { category: 'category', limit: 0, offset: 0 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(SystemPromptStorage.NotFoundError);

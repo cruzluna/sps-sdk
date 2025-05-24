@@ -46,12 +46,16 @@ describe('resource prompts', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = client.prompts.update('id', {
-      body_id: 'id',
-      content: 'content',
-      parent: 'parent',
-    });
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.prompts.retrieve('id', { metadata: true }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(SystemPromptStorage.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = client.prompts.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,30 +66,14 @@ describe('resource prompts', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await client.prompts.update('id', {
-      body_id: 'id',
-      content: 'content',
-      parent: 'parent',
-      branched: true,
-    });
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.prompts.list({ category: 'category', from: 0, size: 0, to: 0 });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await client.prompts.list({ category: 'category', from: 0, size: 0, to: 0 });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.prompts.list(
+        { category: 'category', limit: 0, offset: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(SystemPromptStorage.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -101,8 +89,8 @@ describe('resource prompts', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieveContent: only required params', async () => {
-    const responsePromise = client.prompts.retrieveContent('id', { latest: true });
+  test.skip('retrieveContent', async () => {
+    const responsePromise = client.prompts.retrieveContent('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -113,30 +101,10 @@ describe('resource prompts', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieveContent: required and optional params', async () => {
-    const response = await client.prompts.retrieveContent('id', { latest: true });
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('updateMetadata: only required params', async () => {
-    const responsePromise = client.prompts.updateMetadata('id', { body_id: 'id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('updateMetadata: required and optional params', async () => {
-    const response = await client.prompts.updateMetadata('id', {
-      body_id: 'id',
-      category: 'category',
-      description: 'description',
-      name: 'name',
-      tags: ['string'],
-    });
+  test.skip('retrieveContent: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.prompts.retrieveContent('id', { latest: true }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(SystemPromptStorage.NotFoundError);
   });
 });

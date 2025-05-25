@@ -8,7 +8,7 @@ import { path } from '../internal/utils/path';
 
 export class Prompts extends APIResource {
   /**
-   * Create prompt
+   * Create prompt or update it by passing the parent id
    */
   create(body: PromptCreateParams, options?: RequestOptions): APIPromise<Prompt> {
     return this._client.post('/prompt', { body, ...options });
@@ -59,6 +59,17 @@ export class Prompts extends APIResource {
   ): APIPromise<string> {
     return this._client.get(path`/prompt/${id}/content`, {
       query,
+      ...options,
+      headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Update prompt metadata
+   */
+  updateMetadata(body: PromptUpdateMetadataParams, options?: RequestOptions): APIPromise<string> {
+    return this._client.put('/prompt/metadata', {
+      body,
       ...options,
       headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
     });
@@ -140,6 +151,8 @@ export type PromptListResponse = Array<Prompt>;
 
 export type PromptRetrieveContentResponse = string;
 
+export type PromptUpdateMetadataResponse = string;
+
 export interface PromptCreateParams {
   /**
    * The content of the prompt
@@ -209,15 +222,44 @@ export interface PromptRetrieveContentParams {
   latest?: boolean;
 }
 
+export interface PromptUpdateMetadataParams {
+  /**
+   * The id of the prompt
+   */
+  id: string;
+
+  /**
+   * The category of the prompt
+   */
+  category?: string | null;
+
+  /**
+   * The description of the prompt
+   */
+  description?: string | null;
+
+  /**
+   * The name of the prompt
+   */
+  name?: string | null;
+
+  /**
+   * The tags of the prompt
+   */
+  tags?: Array<string> | null;
+}
+
 export declare namespace Prompts {
   export {
     type Prompt as Prompt,
     type PromptRetrieveResponse as PromptRetrieveResponse,
     type PromptListResponse as PromptListResponse,
     type PromptRetrieveContentResponse as PromptRetrieveContentResponse,
+    type PromptUpdateMetadataResponse as PromptUpdateMetadataResponse,
     type PromptCreateParams as PromptCreateParams,
     type PromptRetrieveParams as PromptRetrieveParams,
     type PromptListParams as PromptListParams,
     type PromptRetrieveContentParams as PromptRetrieveContentParams,
+    type PromptUpdateMetadataParams as PromptUpdateMetadataParams,
   };
 }

@@ -6,8 +6,10 @@ export {
   type PromptRetrieveResponse,
   type PromptListResponse,
   type PromptRetrieveContentResponse,
+  type PromptUpdateMetadataResponse,
   type PromptCreateParams,
   type PromptRetrieveParams,
   type PromptListParams,
   type PromptRetrieveContentParams,
+  type PromptUpdateMetadataParams,
 } from './prompts';

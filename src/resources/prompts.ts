@@ -8,7 +8,7 @@ import { path } from '../internal/utils/path';
 
 export class Prompts extends APIResource {
   /**
-   * Create prompt
+   * Create prompt or update it by passing the parent id
    */
   create(body: PromptCreateParams, options?: RequestOptions): APIPromise<Prompt> {
     return this._client.post('/prompt', { body, ...options });

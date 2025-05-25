@@ -29,6 +29,8 @@ import {
   PromptRetrieveContentResponse,
   PromptRetrieveParams,
   PromptRetrieveResponse,
+  PromptUpdateMetadataParams,
+  PromptUpdateMetadataResponse,
   Prompts,
 } from './resources/prompts';
 import { readEnv } from './internal/utils/env';
@@ -719,9 +721,11 @@ export declare namespace SystemPromptStorage {
     type PromptRetrieveResponse as PromptRetrieveResponse,
     type PromptListResponse as PromptListResponse,
     type PromptRetrieveContentResponse as PromptRetrieveContentResponse,
+    type PromptUpdateMetadataResponse as PromptUpdateMetadataResponse,
     type PromptCreateParams as PromptCreateParams,
     type PromptRetrieveParams as PromptRetrieveParams,
     type PromptListParams as PromptListParams,
     type PromptRetrieveContentParams as PromptRetrieveContentParams,
+    type PromptUpdateMetadataParams as PromptUpdateMetadataParams,
   };
 }

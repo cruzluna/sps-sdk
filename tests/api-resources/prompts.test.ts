@@ -107,4 +107,27 @@ describe('resource prompts', () => {
       client.prompts.retrieveContent('id', { latest: true }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(SystemPromptStorage.NotFoundError);
   });
+
+  // skipped: tests are disabled for the time being
+  test.skip('updateMetadata: only required params', async () => {
+    const responsePromise = client.prompts.updateMetadata({ id: 'id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('updateMetadata: required and optional params', async () => {
+    const response = await client.prompts.updateMetadata({
+      id: 'id',
+      category: 'category',
+      description: 'description',
+      name: 'name',
+      tags: ['string'],
+    });
+  });
 });

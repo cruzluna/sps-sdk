@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.0-alpha.9 (2025-05-31)
+
+Full Changelog: [v0.1.0-alpha.8...v0.1.0-alpha.9](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.8...v0.1.0-alpha.9)
+
+### Bug Fixes
+
+* compat with more runtimes ([40ce8c8](https://github.com/cruzluna/sps-sdk/commit/40ce8c8bcfabd45127d1b6dac9fb04195664e7a6))
+
+
+### Chores
+
+* **deps:** bump eslint-plugin-prettier ([1b545fd](https://github.com/cruzluna/sps-sdk/commit/1b545fd4dab60b235f7e1b37c1df79c4e83bb753))
+* improve publish-npm script --latest tag logic ([a9f324c](https://github.com/cruzluna/sps-sdk/commit/a9f324cb9dd07a691724a7221ec35080fc0ddfde))
+* **internal:** update jest config ([e7f7c65](https://github.com/cruzluna/sps-sdk/commit/e7f7c65c5b298cca856cc75b34c4c29f94283707))
+
 ## 0.1.0-alpha.8 (2025-05-25)
 
 Full Changelog: [v0.1.0-alpha.7...v0.1.0-alpha.8](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.7...v0.1.0-alpha.8)

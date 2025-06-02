@@ -21,12 +21,8 @@ export class Prompts extends APIResource {
     id: string,
     query: PromptRetrieveParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<string> {
-    return this._client.get(path`/prompt/${id}`, {
-      query,
-      ...options,
-      headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
-    });
+  ): APIPromise<Prompt> {
+    return this._client.get(path`/prompt/${id}`, { query, ...options });
   }
 
   /**
@@ -145,8 +141,6 @@ export namespace Prompt {
   }
 }
 
-export type PromptRetrieveResponse = string;
-
 export type PromptListResponse = Array<Prompt>;
 
 export type PromptRetrieveContentResponse = string;
@@ -252,7 +246,6 @@ export interface PromptUpdateMetadataParams {
 export declare namespace Prompts {
   export {
     type Prompt as Prompt,
-    type PromptRetrieveResponse as PromptRetrieveResponse,
     type PromptListResponse as PromptListResponse,
     type PromptRetrieveContentResponse as PromptRetrieveContentResponse,
     type PromptUpdateMetadataResponse as PromptUpdateMetadataResponse,

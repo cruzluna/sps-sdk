@@ -28,7 +28,6 @@ import {
   PromptRetrieveContentParams,
   PromptRetrieveContentResponse,
   PromptRetrieveParams,
-  PromptRetrieveResponse,
   PromptUpdateMetadataParams,
   PromptUpdateMetadataResponse,
   Prompts,
@@ -718,7 +717,6 @@ export declare namespace SystemPromptStorage {
   export {
     Prompts as Prompts,
     type Prompt as Prompt,
-    type PromptRetrieveResponse as PromptRetrieveResponse,
     type PromptListResponse as PromptListResponse,
     type PromptRetrieveContentResponse as PromptRetrieveContentResponse,
     type PromptUpdateMetadataResponse as PromptUpdateMetadataResponse,

@@ -3,7 +3,6 @@
 export {
   Prompts,
   type Prompt,
-  type PromptRetrieveResponse,
   type PromptListResponse,
   type PromptRetrieveContentResponse,
   type PromptUpdateMetadataResponse,

@@ -26,13 +26,9 @@ const client = new SystemPromptStorage({
   apiKey: process.env['SYSTEM_PROMPT_STORAGE_API_KEY'], // This is the default and can be omitted
 });
 
-async function main() {
-  const prompt = await client.prompts.create({ content: 'content' });
+const prompt = await client.prompts.create({ content: 'content' });
 
-  console.log(prompt.id);
-}
-
-main();
+console.log(prompt.id);
 ```
 
 ### Request & Response types
@@ -47,12 +43,8 @@ const client = new SystemPromptStorage({
   apiKey: process.env['SYSTEM_PROMPT_STORAGE_API_KEY'], // This is the default and can be omitted
 });
 
-async function main() {
-  const params: SystemPromptStorage.PromptCreateParams = { content: 'content' };
-  const prompt: SystemPromptStorage.Prompt = await client.prompts.create(params);
-}
-
-main();
+const params: SystemPromptStorage.PromptCreateParams = { content: 'content' };
+const prompt: SystemPromptStorage.Prompt = await client.prompts.create(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -65,19 +57,15 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-async function main() {
-  const prompt = await client.prompts.create({ content: 'content' }).catch(async (err) => {
-    if (err instanceof SystemPromptStorage.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
-}
-
-main();
+const prompt = await client.prompts.create({ content: 'content' }).catch(async (err) => {
+  if (err instanceof SystemPromptStorage.APIError) {
+    console.log(err.status); // 400
+    console.log(err.name); // BadRequestError
+    console.log(err.headers); // {server: 'nginx', ...}
+  } else {
+    throw err;
+  }
+});
 ```
 
 Error codes are as follows:

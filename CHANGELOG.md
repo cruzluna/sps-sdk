@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.12 (2025-06-07)
+
+Full Changelog: [v0.1.0-alpha.11...v0.1.0-alpha.12](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.11...v0.1.0-alpha.12)
+
+### Chores
+
+* avoid type error in certain environments ([2301c71](https://github.com/cruzluna/sps-sdk/commit/2301c71b308161cfb9e200843abe243ff13b3b2e))
+
 ## 0.1.0-alpha.11 (2025-06-04)
 
 Full Changelog: [v0.1.0-alpha.10...v0.1.0-alpha.11](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.10...v0.1.0-alpha.11)

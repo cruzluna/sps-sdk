@@ -10,8 +10,12 @@ export class Prompts extends APIResource {
   /**
    * Create prompt or update it by passing the parent id
    */
-  create(body: PromptCreateParams, options?: RequestOptions): APIPromise<Prompt> {
-    return this._client.post('/prompt', { body, ...options });
+  create(body: PromptCreateParams, options?: RequestOptions): APIPromise<string> {
+    return this._client.post('/prompt', {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
+    });
   }
 
   /**
@@ -141,6 +145,8 @@ export namespace Prompt {
   }
 }
 
+export type PromptCreateResponse = string;
+
 export type PromptListResponse = Array<Prompt>;
 
 export type PromptRetrieveContentResponse = string;
@@ -246,6 +252,7 @@ export interface PromptUpdateMetadataParams {
 export declare namespace Prompts {
   export {
     type Prompt as Prompt,
+    type PromptCreateResponse as PromptCreateResponse,
     type PromptListResponse as PromptListResponse,
     type PromptRetrieveContentResponse as PromptRetrieveContentResponse,
     type PromptUpdateMetadataResponse as PromptUpdateMetadataResponse,

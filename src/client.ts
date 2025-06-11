@@ -23,6 +23,7 @@ import { FinalRequestOptions, RequestOptions } from './internal/request-options'
 import {
   Prompt,
   PromptCreateParams,
+  PromptCreateResponse,
   PromptListParams,
   PromptListResponse,
   PromptRetrieveContentParams,
@@ -717,6 +718,7 @@ export declare namespace SystemPromptStorage {
   export {
     Prompts as Prompts,
     type Prompt as Prompt,
+    type PromptCreateResponse as PromptCreateResponse,
     type PromptListResponse as PromptListResponse,
     type PromptRetrieveContentResponse as PromptRetrieveContentResponse,
     type PromptUpdateMetadataResponse as PromptUpdateMetadataResponse,

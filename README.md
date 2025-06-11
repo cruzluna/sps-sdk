@@ -27,8 +27,6 @@ const client = new SystemPromptStorage({
 });
 
 const prompt = await client.prompts.create({ content: 'content' });
-
-console.log(prompt.id);
 ```
 
 ### Request & Response types
@@ -44,7 +42,7 @@ const client = new SystemPromptStorage({
 });
 
 const params: SystemPromptStorage.PromptCreateParams = { content: 'content' };
-const prompt: SystemPromptStorage.Prompt = await client.prompts.create(params);
+const prompt: string = await client.prompts.create(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -143,7 +141,7 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: prompt, response: raw } = await client.prompts.create({ content: 'content' }).withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(prompt.id);
+console.log(prompt);
 ```
 
 ### Logging

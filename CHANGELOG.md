@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.0-alpha.14 (2025-06-17)
+
+Full Changelog: [v0.1.0-alpha.13...v0.1.0-alpha.14](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.13...v0.1.0-alpha.14)
+
+### Features
+
+* **client:** add support for endpoint-specific base URLs ([7998043](https://github.com/cruzluna/sps-sdk/commit/79980433e4b0a948bcd04597c638bb2f2ab8ef18))
+
+
+### Bug Fixes
+
+* publish script — handle NPM errors correctly ([32c9c66](https://github.com/cruzluna/sps-sdk/commit/32c9c66f38c781157f74e6c63e9945497e08c60f))
+
+
+### Chores
+
+* **client:** refactor imports ([19e9c10](https://github.com/cruzluna/sps-sdk/commit/19e9c103206428bd1705fe06b759d0ad85267606))
+* **internal:** add pure annotations, make base APIResource abstract ([9064e09](https://github.com/cruzluna/sps-sdk/commit/9064e09f70962fe63c5a86fec1a12ad06201324a))
+
 ## 0.1.0-alpha.13 (2025-06-11)
 
 Full Changelog: [v0.1.0-alpha.12...v0.1.0-alpha.13](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.12...v0.1.0-alpha.13)

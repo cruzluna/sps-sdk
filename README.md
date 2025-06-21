@@ -1,6 +1,6 @@
 # System Prompt Storage TypeScript API Library
 
-[![NPM version](https://img.shields.io/npm/v/system-prompt-storage.svg)](https://npmjs.org/package/system-prompt-storage) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/system-prompt-storage)
+[![NPM version](<https://img.shields.io/npm/v/system-prompt-storage.svg?label=npm%20(stable)>)](https://npmjs.org/package/system-prompt-storage) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/system-prompt-storage)
 
 This library provides convenient access to the System Prompt Storage REST API from server-side TypeScript or JavaScript.
 
@@ -221,9 +221,8 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.foo.create({
-  foo: 'my_param',
-  bar: 12,
+client.prompts.create({
+  // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
 });

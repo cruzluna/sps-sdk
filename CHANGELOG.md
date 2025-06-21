@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.0-alpha.15 (2025-06-21)
+
+Full Changelog: [v0.1.0-alpha.14...v0.1.0-alpha.15](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.14...v0.1.0-alpha.15)
+
+### Bug Fixes
+
+* **client:** explicitly copy fetch in withOptions ([f5c6058](https://github.com/cruzluna/sps-sdk/commit/f5c60588c5e3d0d69415ebbe4f1a08a40587af9f))
+
+
+### Chores
+
+* **ci:** enable for pull requests ([2870f6b](https://github.com/cruzluna/sps-sdk/commit/2870f6b32d2d2a0fdd1238e20d176f09d06da77b))
+* **readme:** update badges ([b9083b8](https://github.com/cruzluna/sps-sdk/commit/b9083b8f5da80573280b46dff2a5d8e00f5a02a2))
+* **readme:** use better example snippet for undocumented params ([4a589f5](https://github.com/cruzluna/sps-sdk/commit/4a589f5ce85b235e2baafee80cddd615bfa88dc7))
+
 ## 0.1.0-alpha.14 (2025-06-17)
 
 Full Changelog: [v0.1.0-alpha.13...v0.1.0-alpha.14](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.13...v0.1.0-alpha.14)

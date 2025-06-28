@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.16 (2025-06-28)
+
+Full Changelog: [v0.1.0-alpha.15...v0.1.0-alpha.16](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.15...v0.1.0-alpha.16)
+
+### Bug Fixes
+
+* **ci:** release-doctor — report correct token name ([c52cd68](https://github.com/cruzluna/sps-sdk/commit/c52cd689d1a824882eaf10083acfbc73b3912353))
+* **client:** get fetchOptions type more reliably ([1aab373](https://github.com/cruzluna/sps-sdk/commit/1aab373aef9f877410b04d7b8efc1fffbba70c1d))
+
+
+### Chores
+
+* **ci:** only run for pushes and fork pull requests ([26dd53b](https://github.com/cruzluna/sps-sdk/commit/26dd53b8ad12f4adff81ac49b206225b951c55ea))
+
 ## 0.1.0-alpha.15 (2025-06-21)
 
 Full Changelog: [v0.1.0-alpha.14...v0.1.0-alpha.15](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.14...v0.1.0-alpha.15)

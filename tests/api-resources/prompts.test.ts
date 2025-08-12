@@ -8,7 +8,7 @@ const client = new SystemPromptStorage({
 });
 
 describe('resource prompts', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.prompts.create({ content: 'content' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource prompts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.prompts.create({
       content: 'content',
@@ -33,7 +33,7 @@ describe('resource prompts', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.prompts.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
@@ -45,7 +45,7 @@ describe('resource prompts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -53,7 +53,7 @@ describe('resource prompts', () => {
     ).rejects.toThrow(SystemPromptStorage.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.prompts.list();
     const rawResponse = await responsePromise.asResponse();
@@ -65,7 +65,7 @@ describe('resource prompts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -76,7 +76,7 @@ describe('resource prompts', () => {
     ).rejects.toThrow(SystemPromptStorage.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.prompts.delete('id');
     const rawResponse = await responsePromise.asResponse();
@@ -88,7 +88,7 @@ describe('resource prompts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieveContent', async () => {
     const responsePromise = client.prompts.retrieveContent('id');
     const rawResponse = await responsePromise.asResponse();
@@ -100,7 +100,7 @@ describe('resource prompts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieveContent: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -108,7 +108,7 @@ describe('resource prompts', () => {
     ).rejects.toThrow(SystemPromptStorage.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('updateMetadata: only required params', async () => {
     const responsePromise = client.prompts.updateMetadata({ id: 'id' });
     const rawResponse = await responsePromise.asResponse();
@@ -120,7 +120,7 @@ describe('resource prompts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('updateMetadata: required and optional params', async () => {
     const response = await client.prompts.updateMetadata({
       id: 'id',

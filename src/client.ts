@@ -734,7 +734,9 @@ export class SystemPromptStorage {
 
   prompts: API.Prompts = new API.Prompts(this);
 }
+
 SystemPromptStorage.Prompts = Prompts;
+
 export declare namespace SystemPromptStorage {
   export type RequestOptions = Opts.RequestOptions;
 

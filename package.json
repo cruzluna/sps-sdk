@@ -1,6 +1,6 @@
 {
   "name": "system-prompt-storage",
-  "version": "0.1.0-alpha.15",
+  "version": "0.1.0-alpha.16",
   "description": "The official TypeScript library for the System Prompt Storage API",
   "author": "System Prompt Storage <>",
   "types": "dist/index.d.ts",

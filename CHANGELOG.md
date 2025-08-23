@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.1.0-alpha.16 (2025-08-23)
+
+Full Changelog: [v0.1.0-alpha.15...v0.1.0-alpha.16](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.15...v0.1.0-alpha.16)
+
+### Features
+
+* **mcp:** add code execution tool ([865b210](https://github.com/cruzluna/sps-sdk/commit/865b210687fb7e143851ea1adb2f300020ab7461))
+
+
+### Bug Fixes
+
+* **ci:** release-doctor — report correct token name ([c52cd68](https://github.com/cruzluna/sps-sdk/commit/c52cd689d1a824882eaf10083acfbc73b3912353))
+* **client:** get fetchOptions type more reliably ([1aab373](https://github.com/cruzluna/sps-sdk/commit/1aab373aef9f877410b04d7b8efc1fffbba70c1d))
+
+
+### Chores
+
+* add docs to RequestOptions type ([e23efcc](https://github.com/cruzluna/sps-sdk/commit/e23efcc5bc1401bbb61e226bc7a6f4185e41a7a9))
+* add package to package.json ([2d8d5f3](https://github.com/cruzluna/sps-sdk/commit/2d8d5f3d94fea200420cde2a09df3d89e191c7db))
+* **ci:** only run for pushes and fork pull requests ([26dd53b](https://github.com/cruzluna/sps-sdk/commit/26dd53b8ad12f4adff81ac49b206225b951c55ea))
+* **client:** improve path param validation ([70e6374](https://github.com/cruzluna/sps-sdk/commit/70e6374f09641519bbc45f54e2751236122745a9))
+* **client:** qualify global Blob ([9fe38a7](https://github.com/cruzluna/sps-sdk/commit/9fe38a75fea6ef0db5605857f6326a397d288fc6))
+* **deps:** update dependency @types/node to v20.17.58 ([7d107e6](https://github.com/cruzluna/sps-sdk/commit/7d107e628c75ec96f274d4cf5b731944b9d5a3ec))
+* **internal:** codegen related update ([4841e91](https://github.com/cruzluna/sps-sdk/commit/4841e91bdfe18a08889be0b2f99bef193f362d8a))
+* **internal:** formatting change ([cd1a55a](https://github.com/cruzluna/sps-sdk/commit/cd1a55abcc5afa2ed79f5646d095c35d0c8877b2))
+* **internal:** move publish config ([6bee9ef](https://github.com/cruzluna/sps-sdk/commit/6bee9ef3f96b80f560cc416dbc42219e17365990))
+* **internal:** remove redundant imports config ([6236c4f](https://github.com/cruzluna/sps-sdk/commit/6236c4fc3aa1aa6dab33c4c9929c2e4179bc853b))
+* **internal:** update comment in script ([94cc1e2](https://github.com/cruzluna/sps-sdk/commit/94cc1e2e6be088d54ca96051b4fc5dda0d6e58f7))
+* make some internal functions async ([e3a4772](https://github.com/cruzluna/sps-sdk/commit/e3a477287fe5b029d1762c9d1ec005c9c3bac862))
+* **ts:** reorder package.json imports ([a7d523c](https://github.com/cruzluna/sps-sdk/commit/a7d523c15bfa16bcc2652edc15552a86ad74a08f))
+* update @stainless-api/prism-cli to v5.15.0 ([a237c8f](https://github.com/cruzluna/sps-sdk/commit/a237c8f0a150fc9a508bcd60213f358c2d217aac))
+* update CI script ([58d4c7b](https://github.com/cruzluna/sps-sdk/commit/58d4c7b72fcb46cf569817f300a0020a303b210b))
+
 ## 0.1.0-alpha.15 (2025-06-21)
 
 Full Changelog: [v0.1.0-alpha.14...v0.1.0-alpha.15](https://github.com/cruzluna/sps-sdk/compare/v0.1.0-alpha.14...v0.1.0-alpha.15)
